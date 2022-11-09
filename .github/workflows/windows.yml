@@ -18,8 +18,12 @@ on:
       - v*
 
 jobs:
-  构建:
-    runs-on: windows-2019
+  Compile:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2019, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
         with:
