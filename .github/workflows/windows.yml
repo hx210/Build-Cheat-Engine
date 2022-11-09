@@ -1,15 +1,30 @@
 name: Windows
 
-on: [push, pull_request]
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      目标版本:
+        description: "目标版本"
+        type: string
+        default: "7.4"
+        required: false
+  push:
+    branches:
+      - "main"
+      - "releases/**"
+    tags:
+      - v*
 
 jobs:
-  Riot-Games-Servers:
+  构建:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v3
         with:
           repository: "cheat-engine/cheat-engine"
-          ref: "7.4"
+          ref: ${{ inputs.目标版本 }}
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
