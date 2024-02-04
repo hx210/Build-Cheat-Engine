@@ -6,7 +6,22 @@ on:
 jobs:
   Compile:
     runs-on: macos-14
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: pwd
-        shell: bash
-        run: ls -lha /System/Library/Fonts
+        run: |
+          ls -lha /System/Library/Fonts
+
+      - name: 复制上传文件
+        run: |
+          mkdir Fonts
+          cp "/System/Library/Fonts/PingFang.ttc" Fonts
+          cp "/System/Library/Fonts/ヒラギノ丸ゴ ProN W4.ttc" Fonts
+
+      - name: 上传工件
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ github.job }}
+          path: Fonts
