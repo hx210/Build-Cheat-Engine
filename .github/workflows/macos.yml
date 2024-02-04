@@ -8,5 +8,5 @@ jobs:
     runs-on: macos-14
     steps:
       - name: pwd
-        shell: cmd
+        shell: bash
         run: ls -lha /System/Library/Fonts
