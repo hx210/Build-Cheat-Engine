@@ -1,0 +1,12 @@
+name: 提取
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Compile:
+    runs-on: macos-14
+    steps:
+      - name: pwd
+        shell: cmd
+        run: ls -lha /System/Library/Fonts
